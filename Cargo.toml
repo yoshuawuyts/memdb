@@ -1,0 +1,15 @@
+[package]
+name = "memdb"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-net-web/memdb"
+documentation = "https://docs.rs/memdb"
+description = "Thread-safe in-memory key-value store"
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+
+[dependencies]
+failure = "0.1.2"
+parking_lot = "0.6.3"
+
+[dev-dependencies]
