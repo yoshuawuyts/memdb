@@ -21,6 +21,21 @@ let val = db.get("beep".into());
 assert_eq!(val, Some("boop".to_string()));
 ```
 
+### Usage In Threads
+To use the database inside a thread, call `.clone()` on it and `move` the
+result.
+
+```rust
+let db = Memdb::default();
+
+let mut db_handle = db.clone();
+let t = thread::spawn(move || {
+  db_handle.set("beep".into(), "boop".into());
+});
+
+t.join().unwrap();
+```
+
 ## Installation
 ```sh
 $ cargo add memdb
