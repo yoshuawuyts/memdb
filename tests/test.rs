@@ -17,10 +17,12 @@ async fn threaded_set_get() {
     let mut handle = db.clone();
     runtime::spawn(async move {
         handle.set("beep", "boop").await;
-        let mut handle = db.clone();
         runtime::spawn(async move {
-            let val = db.get("beep").await;
+            let handle = handle.clone();
+            let val = handle.get("beep").await;
             assert_eq!(val, Some("boop".as_bytes().to_owned()));
-        }).await;
-    }).await;
+        })
+        .await;
+    })
+    .await;
 }
