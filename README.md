@@ -10,30 +10,11 @@ Does not persist to disk.
 
 ## Usage
 ```rust
-extern crate memdb;
-
-use memdb::Memdb;
-
-let mut db = Memdb::default();
-db.set("beep".into(), "boop".into());
-
-let val = db.get("beep".into());
-assert_eq!(val, Some("boop".to_string()));
-```
-
-### Usage In Threads
-To use the database inside a thread, call `.clone()` on it and `move` the
-result.
-
-```rust
-let db = Memdb::default();
-
-let mut db_handle = db.clone();
-let t = thread::spawn(move || {
-  db_handle.set("beep".into(), "boop".into());
-});
-
-t.join().unwrap();
+let mut db = Memdb::open().await?;
+db.set("beep", "boop").await?;
+let val = db.get("beep").await?;
+assert_eq!(val, Some("boop".as_bytes().to_owned()));
+Ok(())
 ```
 
 ## Installation
