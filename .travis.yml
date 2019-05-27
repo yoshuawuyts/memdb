@@ -3,7 +3,7 @@ rust:
   - nightly
 
 before_script: |
-  rustup component add rustfmt-preview &&
+  rustup component add rustfmt-preview
 script: |
   cargo fmt -- --check &&
   cargo build --verbose &&
