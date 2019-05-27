@@ -1,32 +1,34 @@
-extern crate memdb;
+#![feature(async_await)]
 
 use memdb::Memdb;
-use std::thread;
+use std::error;
+use std::io;
 
-#[test]
-fn set_get() {
-  let mut db = Memdb::default();
-  db.set("beep".into(), "boop".into());
-  let val = db.get("beep".into());
-  assert_eq!(val, Some("boop".to_string()));
+#[runtime::test]
+async fn set_get() -> io::Result<()> {
+    let mut db = Memdb::open().await?;
+    db.set("beep", "boop").await?;
+    let val = db.get("beep").await?;
+    assert_eq!(val, Some("boop".as_bytes().to_owned()));
+    Ok(())
 }
 
-#[test]
-fn threaded_set_get() {
-  let db = Memdb::default();
+#[runtime::test]
+async fn threaded_set_get() -> io::Result<()> {
+    let db = Memdb::open().await?;
 
-  let mut handle = db.clone();
-  let setter = thread::spawn(move || {
-    handle.set("beep".into(), "boop".into());
-
-    let handle = db.clone();
-    let getter = thread::spawn(move || {
-      let val = handle.get("beep".into());
-      assert_eq!(val, Some("boop".to_string()));
-    });
-
-    getter.join().unwrap();
-  });
-
-  setter.join().unwrap();
+    let mut handle = db.clone();
+    runtime::spawn(async move {
+        handle.set("beep", "boop").await?;
+        runtime::spawn(async move {
+            let handle = handle.clone();
+            let val = handle.get("beep").await?;
+            assert_eq!(val, Some("boop".as_bytes().to_owned()));
+            Ok::<(), std::io::Error>(())
+        })
+        .await?;
+        Ok::<(), std::io::Error>(())
+    })
+    .await?;
+    Ok::<(), std::io::Error>(())
 }

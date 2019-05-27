@@ -7,9 +7,10 @@ documentation = "https://docs.rs/memdb"
 description = "Thread-safe in-memory key-value store"
 authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
 readme = "README.md"
+edition = "2018"
 
 [dependencies]
-failure = "0.1.2"
 parking_lot = "0.6.3"
 
 [dev-dependencies]
+runtime = "0.3.0-alpha.4"
