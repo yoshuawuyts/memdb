@@ -2,7 +2,7 @@
 name = "memdb"
 version = "1.0.0"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/rust-net-web/memdb"
+repository = "https://github.com/rustasync/memdb"
 documentation = "https://docs.rs/memdb"
 description = "Thread-safe in-memory key-value store"
 authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
