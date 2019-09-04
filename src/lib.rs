@@ -1,12 +1,9 @@
-#![feature(async_await)]
-
 //! Thread-safe in-memory key-value store. Ideal for development and prototyping.
 //! Does not persist to disk.
 //!
 //! ## Examples
 //!
 //! ```
-//! # #![feature(async_await)]
 //! # #[runtime::main]
 //! # async fn main() -> std::io::Result<()> {
 //! let mut db = memdb::Memdb::open().await?;

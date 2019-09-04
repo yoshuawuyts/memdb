@@ -1,5 +1,3 @@
-#![feature(async_await)]
-
 use memdb::Memdb;
 use std::error;
 use std::io;
