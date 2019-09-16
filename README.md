@@ -29,7 +29,7 @@ $ cargo add memdb
 [2]: https://crates.io/crates/memdb
  [3]: https://travis-ci.com/rustasync/memdb.svg?branch=master
 [4]: https://travis-ci.com/rustasync/memdb
-[5]: https://travis-ci.com/rustasync/memdb.svg?branch=master
+[5]: https://img.shields.io/crates/d/memdb.svg?style=flat-square
 [6]: https://crates.io/crates/memdb
 [7]: https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square
 [8]: https://docs.rs/memdb
